@@ -11,6 +11,9 @@ const app = express();
 //Configurar Cors
 app.use( cors() );
 
+// Lectura y parseo de Body
+app.use( express.json() );
+
 //Base de Datos 
 dbConnection();
 
@@ -20,12 +23,18 @@ console.log( process.env );
 //Datos DataBase User: mean_user Pass: Xf3HNQJe7w1VoFrR
 
 //Rutas
-app.get( '/', (req, res) =>{
-    res.json({
-        ok: true,
-        msg: 'Hola Mundo'
-    })
-});
+app.use('/api/usuarios', require ('./routes/usuariosRoute'));
+app.use('/api/login', require ('./routes/auth'));
+
+// app.get( '/api/usuarios', (req, res) =>{
+//     res.json({
+//         ok: true,
+//         usuarios: [{
+//             id: 123,
+//             nombre: 'Fernando'
+//         }]
+//     })
+// });
 
 
 app.listen( process.env.PORT , () => {
