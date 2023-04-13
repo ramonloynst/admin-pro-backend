@@ -25,6 +25,10 @@ console.log( process.env );
 //Rutas
 app.use('/api/usuarios', require ('./routes/usuariosRoute'));
 app.use('/api/login', require ('./routes/auth'));
+app.use('/api/hospitales', require ('./routes/hospitalesRoute'));
+app.use('/api/medicos', require ('./routes/medicosRoute'));
+app.use('/api/busqueda', require ('./routes/busquedaRoute'));
+app.use('/api/upload', require ('./routes/uploadRoute'));
 
 // app.get( '/api/usuarios', (req, res) =>{
 //     res.json({
