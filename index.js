@@ -11,6 +11,9 @@ const app = express();
 //Configurar Cors
 app.use( cors() );
 
+//Carpeta Publica
+app.use( express.static('public') );
+
 // Lectura y parseo de Body
 app.use( express.json() );
 
@@ -29,6 +32,7 @@ app.use('/api/hospitales', require ('./routes/hospitalesRoute'));
 app.use('/api/medicos', require ('./routes/medicosRoute'));
 app.use('/api/busqueda', require ('./routes/busquedaRoute'));
 app.use('/api/upload', require ('./routes/uploadRoute'));
+
 
 // app.get( '/api/usuarios', (req, res) =>{
 //     res.json({
