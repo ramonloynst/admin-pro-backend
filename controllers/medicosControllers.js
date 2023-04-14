@@ -60,19 +60,82 @@ const createMedico = async (req, res = response) =>{
 }
 
 const updateMedico = async ( req, res = response ) => {
-    res.json({
-        ok: true,
-       msg: 'Actualizar los Medico'
-    });
+
+    const id = req.params.id;
+    const uid = req.uid;
+
+    try {
+
+        const medico = await Medico.findById(id);
+
+        if(!medico){
+
+            res.status(404).json({
+                ok: false,
+                msg: 'Medico no encotrado'
+            });
+
+        }
+
+        const cambiosMedico = {
+            ...req.body,
+            usuario: uid
+        }
+        
+        const medicoActualizado = await Medico.findOneAndUpdate(id, cambiosMedico, {new: true});
+
+        res.json({
+            ok: true,
+            meidco: medicoActualizado
+        });
+        
+    } catch (error) {
+        
+        console.log(error);
+
+        res.status(500).json({
+            ok: false,
+            msg: 'Hable con el Administrador'
+        });
+    }
+
     
 }
 
 
 const deleteMedico = async ( req, res = response ) => {
-    res.json({
-        ok: true,
-       msg: 'Borrar Medico'
-    });
+    const id = req.params.id;
+
+    try {
+
+        const medico = await Medico.findById(id);
+
+        if(!medico){
+
+            res.status(404).json({
+                ok: false,
+                msg: 'Medico no encotrado'
+            });
+
+        }
+
+        await Medico.findByIdAndDelete( id );
+
+
+        res.json({
+            ok: true,
+            msg: 'Medico Eliminado'
+        });
+        
+    } catch (error) {
+        
+        console.log(error);
+
+        res.status(500).json({
+            ok: false,
+            msg: 'Hable con el Administrador'
+        });
+    }
    
 }
 

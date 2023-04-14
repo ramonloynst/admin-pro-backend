@@ -21,26 +21,19 @@ const router = Router();
             validarJWT,
             check('nombre', 'El nombre es Obligatorio').not().isEmpty(),
             validarCampos,
-            // check('password', 'El password es Obligatorio').not().isEmpty(),
-            // check('email', 'El email es Obligatorio').isEmail(),
         ], 
     createHospital );
 
-    router.put( '/:id',  
+    router.put( '/:id', 
         [
-        // validarJWT,
-        // check('nombre', 'El nombre es Obligatorio').not().isEmpty(),
-        // check('role', 'El role es Obligatorio').not().isEmpty(),
-        // check('email', 'El email es Obligatorio').isEmail(),
-        //validarCampos,
-        ],
-    updateHospital );
+            validarJWT,
+            check('nombre', 'El nombre es Obligatorio').not().isEmpty(),
+            validarCampos
+        ], 
+        updateHospital );
 
     router.delete( '/:id',  
-        [
-            // validarJWT,
-            // deleteUsuario
-        ],
+    validarJWT,
     deleteHospital );
 
 

@@ -28,20 +28,14 @@ const router = Router();
 
     router.put( '/:id',  
         [
-        // validarJWT,
-        // check('nombre', 'El nombre es Obligatorio').not().isEmpty(),
-        // check('role', 'El role es Obligatorio').not().isEmpty(),
-        // check('email', 'El email es Obligatorio').isEmail(),
-        // validarCampos,
+        validarJWT,
+        check('nombre', 'El nombre es Obligatorio').not().isEmpty(),
+        check('hospital', 'El hospital id debe ser válido').isMongoId(),
+            validarCampos
         ],
     updateMedico );
 
-    router.delete( '/:id',  
-        [
-            // validarJWT,
-            // deleteUsuario
-        ],
-    deleteMedico );
+    router.delete( '/:id', validarJWT, deleteMedico );
 
 
 
